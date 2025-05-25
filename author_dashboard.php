@@ -1,20 +1,15 @@
 <?php
-// author_dashboard.php
-
-// عرض جميع الأخطاء أثناء التطوير
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
-
-// فتح السيشن والاتصال
 require_once __DIR__ . '/init.php';
 
-// تأمين الصفحة للمؤلف فقط
+
 if (!isset($_SESSION['user_id']) || $_SESSION['role'] !== 'author') {
     header('Location: login.php');
     exit;
 }
 
-// معالجة الحذف
+
 if (isset($_GET['delete_id'])) {
     $id   = intval($_GET['delete_id']);
     $stmt = $conn->prepare("DELETE FROM news WHERE id = ? AND author_id = ?");
@@ -24,7 +19,6 @@ if (isset($_GET['delete_id'])) {
     exit;
 }
 
-// جلب أخبار المؤلف
 $stmt = $conn->prepare("
     SELECT id, title, DATE_FORMAT(dateposted, '%Y-%m-%d') AS dp, status
     FROM news
@@ -52,7 +46,7 @@ $stmt->close();
       padding: 40px;
     }
     .panel {
-      max-width: 1500px;   /* كبرنا الصندوق */
+      max-width: 1500px;   
       margin: auto;
       background: #ffffff;
       border-radius: 10px;
