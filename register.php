@@ -1,31 +1,30 @@
 <?php
-// register.php
 error_reporting(E_ALL);
 ini_set('display_errors',1);
 require_once __DIR__ . '/init.php';
 
 $error = '';
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    // نظّفي المدخلات
+  
     $name     = trim($_POST['name'] ?? '');
     $email    = trim($_POST['email'] ?? '');
     $pass1    = $_POST['password'] ?? '';
     $pass2    = $_POST['confirm_password'] ?? '';
     
-    // تحقق من صحة المدخلات
+   
     if (!$name || !$email || !$pass1) {
-        $error = 'رجاءً عبّئي كل الحقول.';
+        $error = 'رجاءً عبي كل الحقول.';
     } elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
         $error = 'الإيميل غير صحيح.';
     } elseif ($pass1 !== $pass2) {
-        $error = 'كلمتا المرور غير متطابقتين.';
+        $error = 'كلمة المرور غير متطابقتين.';
     } else {
-        // جهّز الهاش
+        
         $hash = password_hash($pass1, PASSWORD_DEFAULT);
-        // دور المستخدم العادي
+        
         $role = 'user';
 
-        // أدخل السجل
+       
         $stmt = $conn->prepare("
           INSERT INTO `user` (name, email, password, role)
           VALUES (?, ?, ?, ?)

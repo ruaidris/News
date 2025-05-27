@@ -1,20 +1,18 @@
 <?php
-// editor_dashboard.php
 
-// 1) عرض الأخطاء لمساعدتنا أثناء التطوير
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
 
-// 2) فتح السيشن والاتصال
+
 require_once __DIR__ . '/init.php';
 
-// 3) تأمين الصفحة للمحرر فقط
+
 if (!isset($_SESSION['user_id']) || $_SESSION['role'] !== 'editor') {
     header('Location: login.php');
     exit;
 }
 
-// 4) معالجة الأفعال (Approve / Deny / Delete)
+
 if (isset($_GET['approve_id']) || isset($_GET['deny_id']) || isset($_GET['delete_id'])) {
     if (isset($_GET['approve_id'])) {
         $nid = intval($_GET['approve_id']);
@@ -34,7 +32,7 @@ if (isset($_GET['approve_id']) || isset($_GET['deny_id']) || isset($_GET['delete
     exit;
 }
 
-// 5) جلب كل الأخبار (أو يمكنك تصفية Pending فقط)
+
 $sql = "
   SELECT n.id, n.title,
          DATE_FORMAT(n.dateposted, '%Y-%m-%d') AS dp,
