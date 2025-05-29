@@ -10,7 +10,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     if ($email === '' || $password === '') {
         $error = 'الرجاء تعبئة الحقلين أولاً';
-    } else {
+    } else 
        
         $stmt = $conn->prepare("SELECT id, password, role FROM `user` WHERE email = ?");
         if ($stmt) {
@@ -41,25 +41,25 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $error = 'حدث خطأ داخلي، الرجاء المحاولة لاحقاً';
         }
     }
-}
 ?>
 <!DOCTYPE html>
-<html lang="ar">
+<html lang="ar" dir="rtl">
 <head>
   <meta charset="utf-8">
   <title>تسجيل الدخول | News Portal</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.2.3/css/bootstrap.rtl.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <link rel="stylesheet" href="style.css">
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   <style>
-    
-    * {
-      margin: 0; padding: 0; box-sizing: border-box;
-      font-family: Arial, sans-serif;
-    }
-    body {
+    .main-content {
       background: #f0f2f5;
-      display: flex; align-items: center; justify-content: center;
-      height: 100vh;
-    }
-    .login-container {
+      display: flex; 
+      align-items: center; 
+      justify-content: center;
+      min-height: 80vh;
+      padding: 40px 0;
+    }    .login-container {
       background: #fff;
       padding: 30px 40px;
       border-radius: 8px;
@@ -97,7 +97,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     .login-container form button {
       width: 100%;
       padding: 10px;
-      background: #007bff;
+      background:  #0e2147;
       color: #fff;
       border: none;
       border-radius: 4px;
@@ -113,11 +113,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
       text-align: center;
       font-size: 13px;
       color: #777;
-    }
-  </style>
+    }  </style>
 </head>
 <body>
-  <div class="login-container">
+  <div class="main-content">
+    <div class="login-container">
     <h1>تسجيل الدخول</h1>
     <?php if ($error): ?>
       <div class="error"><?= htmlspecialchars($error) ?></div>
@@ -127,11 +127,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
       <input type="email" id="email" name="email"  required autofocus>
 
       <label for="password">كلمة المرور</label>
-      <input type="password" id="password" name="password" required>
-
-      <button type="submit">دخول</button>
+      <input type="password" id="password" name="password" required>      <button type="submit">دخول</button>
     </form>
     
+    </div>
   </div>
 </body>
+</html>
 </html>
